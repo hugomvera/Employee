@@ -18,7 +18,11 @@ public class driver {
       employeListOut.toString();
 
       employeListOut.writeText();
+      employeListOut.writeBinary();
 
+
+        System.out.println("lauunched the binary read file");
+        employeListOut.readBinary();
         System.out.println("reading the file");
       employeListOut.readText();
 

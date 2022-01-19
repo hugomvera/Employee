@@ -1,4 +1,8 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -207,4 +211,129 @@ public class EmployeeList implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public void writeBinary() {
+
+//        try {
+//            myWriter = new FileWriter("Data.txt");
+//            myWriter.write(this.length()+"\n");
+//            for(int i=0; i<this.length();i++){
+//                myWriter.write(this.get(i).toStringSimple()+"\n" );
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//        finally {
+//            myWriter.close();
+//        }
+
+
+
+
+
+
+        Path path = Paths.get("dataBytes.txt");
+        byte[] bytes = "ABCD".getBytes(StandardCharsets.UTF_8);
+
+        String lenghtStr =+this.length() + "\n";
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
+        System.out.println(lenghtStr);
+        byte[] lenghtEntries = lenghtStr.getBytes(StandardCharsets.UTF_8);
+        try {
+            Files.write(path, lenghtEntries);    // Java 7+ only
+            for(int i=0; i<this.length();i++){
+                String toWriteStr = this.get(i).toStringSimple() + "\n";
+                byte[] toWrite = toWriteStr.getBytes(StandardCharsets.UTF_8);
+                Files.write(path,toWrite);
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void readBinary() throws IOException {
+        try {
+
+            System.out.println("########################int the readBinary function############################");
+            // File myObj = new File("Data.txt");
+            Path path = Paths.get("dataBytes.txt");
+            byte[] data = Files.readAllBytes(path);
+
+            String first = String.valueOf(data[0]);
+            System.out.println(first);
+//            Scanner myReader = new Scanner(path);
+//            String count = String.valueOf(myReader.nextByte());
+//            System.out.println("The count in the bytes is" + count);
+
+            int whileCount = 0;
+        }
+        catch (RuntimeException e){
+            System.out.println(e);
+        }
+//
+//            while (myReader.hasNextLine()) {
+//                //read a line
+//
+//                String data = myReader.nextLine();
+//
+//                if(whileCount==0){
+//                    whileCount++;
+//                    continue;
+//                }
+//
+//                System.out.println("string is " + data);
+//                //trying to split the data
+//                String[] listParameters = data.trim().split(",");
+//                int length = listParameters.length;
+//                System.out.println("the lenght of the array is "+ length);
+//                //System.out.println(listParameters[1]);
+//
+//                //System.out.println();
+//
+//
+//                //System.out.println(listParameters[1]);
+//
+//                //String[] sp = data.split("[,]", 0);
+//                //System.out.println("sp to string is" + sp[1]);
+//                //System.out.println("the first is" + sp[2]);
+////                int i =0;
+////                ArrayList<String> tempA = new ArrayList<String>();
+////                System.out.println("tempA");
+////                for(String myStr: sp) {
+////                    System.out.println("within the for loop" + i );
+////                    System.out.println(myStr);
+////                    tempA.add(myStr);
+////                    i++;
+////                }
+//                // Employee toAdd = new Employee(temp.get(0),Double.parseDouble(temp.get(1)),Integer.parseInt(temp.get(2)),Integer.parseInt(temp.get(3)),Integer.parseInt(temp.get(4)));
+//
+//
+//
+//                String nameOut= listParameters[0];
+//                System.out.println("the name to be written is " + nameOut);
+//                double salaryOut =Double.parseDouble(listParameters[1]);
+//                System.out.println("the salary out will be  " + salaryOut);
+//                int year =Integer.parseInt(listParameters[2]);
+//                System.out.println("the year is "+ year);
+//                int month =Integer.parseInt(listParameters[3]);
+//                System.out.println("the month is "+ month);
+//                int day =Integer.parseInt(listParameters[4]);
+//                System.out.println("the day is "+ day);
+//
+//                System.out.println("makeing the employee");
+//
+//                Employee tempEmployee = new Employee(nameOut,salaryOut,year,month,day);
+//                this.addList(tempEmployee);
+//
+//
+//            }
+//
+//            myReader.close();
+//        } catch (IOException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+        }
+
 }

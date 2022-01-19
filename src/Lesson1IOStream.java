@@ -50,12 +50,31 @@ public class Lesson1IOStream {
         System.out.println("# \t press d to delete employees based on index number");
         System.out.println("# \t press w to write employees to a file");
         System.out.println("# \t press r to read employees from a file");
-            System.out.println("# \t press q quit");
+        System.out.println("# \t press q quit");
         System.out.println("########## end of  menu options ########");
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 
         String read = myObj.nextLine();  // Read user input
         System.out.println("you have pressed: " + read);  // Output user input
+
+            //for bytes
+            if( read.contains("w") && fType=="binary") {
+                try {
+                    emL.writeBinary();
+                } catch (RuntimeException e) {
+                    System.out.println(e);
+                }
+            }
+            if( read.contains("r") && fType=="text")
+            {
+                System.out.println("Reading Text");
+                try{emL.readBinary();}
+                catch (RuntimeException e){ System.out.println(e);}
+
+            }
+
+
+
             // this is for if there is an text
             if( read.contains("w") && fType=="text") {
                 try {
